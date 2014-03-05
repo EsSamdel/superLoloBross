@@ -8,6 +8,7 @@ class Level {
 public:
   Level(const char * fileName);
   virtual ~Level();
+
   inline int getTileSizeX() {return _tileSizeX;}
   inline int getTileSizeY() {return _tileSizeY;}
   inline int getNbtilesWorldWidth() {return _nbtilesWorldWidth;}
@@ -19,12 +20,6 @@ public:
   inline SDL_Surface * getTileset() {return _tileset;}
   inline Tile getTile(int tileNumber) {return _tileTable[tileNumber];};
   inline Rect getBox() {return _mapBox;};
-
-//  void display(SDL_Surface* screen);
-//  inline void setTileSizeX(int var) {_tileSizeX = var;}
-//  inline void setTileSizeY(int var) {_tileSizeY = var;}
-//  inline void setNbtilesWorldWidth(int var) {_nbtilesWorldWidth = var;}
-//  inline void setNbtilesWorldHeight(int var) {_nbtilesWorldHeight = var;}
 
   void checkObjectif(int i, int j);
 

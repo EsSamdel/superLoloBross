@@ -1,7 +1,6 @@
 #include "Event.hpp"
 
 Event::Event() {
-  // TODO Auto-generated constructor stub
   _quit = 0;
   _mouseX = 0;
   _mouseY = 0;

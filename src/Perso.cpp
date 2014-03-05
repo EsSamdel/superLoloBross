@@ -1,5 +1,4 @@
 #include "Perso.hpp"
-//#include "Level.hpp"
 
 SDL_Surface* loadImage32(const char* fichier_image);
 

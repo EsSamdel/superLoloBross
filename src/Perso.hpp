@@ -3,18 +3,11 @@
 
 #include "Common.hpp"
 
-//#include "Level.hpp"  //<- include croisé : déclarer Level!
-//class Level;
-
 class Perso {
 public:
   Perso(const char * fileName, const int & xPos, const int & yPos, const int & w, const int & h);
   virtual ~Perso();
 
-//  void move(const int & vx, const int & state);
-//  void jump();
-//  void upDatePosition();
-//  void display(SDL_Surface* screen);
   void renderAnimation(SDL_Surface* screen, SDL_Rect* dest);
 
   inline int getPosX() {return _persoBox.x;}
@@ -41,15 +34,6 @@ public:
   inline void setJump(int isOrNot) {_isJumping = isOrNot;};
 
 protected:
-//  void copyBox(const Rect & boxSrc, Rect & boxCp);
-//  void changePosition(const int & vx, const int & vy);
-//  int collision(const Rect & testBox);
-//  void testTuchGround();
-//  void affine(const int & vx, const int & vy);
-//  int testMove(const int & vx, const int & vy);
-
-protected:
-//  Level * _map;
   Rect _persoBox;
   SDL_Surface * _charSet;
   animUnique** _tabAnim;

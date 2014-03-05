@@ -20,7 +20,6 @@ public:
 	virtual ~PhysicalLayer();
 
 	int persoMove(const int & leftRight, const int & jump, const int & state);
-	void persoJump();
 	void displayMap(SDL_Surface* screen);
 	void displayPerso(SDL_Surface* screen);
 	void winAnnimation(SDL_Surface* screen);
@@ -29,6 +28,7 @@ protected:
   Rect2 getAdjacentBox(const Rect & spriteBox);
   Rect2 getFootBox(const Rect & spriteBox);
   void changePositionPerso(const int & vx, const int & vy);
+  void persoJump();
   int testMovePerso(const int & vx, const int & vy);
   void affine(const int & vx, const int & vy);
   int collision(const Rect & spriteBox);
