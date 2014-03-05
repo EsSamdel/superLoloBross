@@ -1,0 +1,10 @@
+#charset
+./images/charLolo.png
+4 1
+0 255 0
+#sequences
+2 2
+0 1 1
+0 2 100
+2 1 1
+2 2 100
