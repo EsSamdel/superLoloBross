@@ -30,8 +30,8 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  SDL_WM_SetIcon(SDL_LoadBMP("./images/sdl_icone.bmp"), NULL);
-  SDL_WM_SetCaption("Super Bro Bross", NULL);
+  SDL_WM_SetIcon(SDL_LoadBMP("./images/lolo.bmp"), NULL);
+  SDL_WM_SetCaption("Super Lolo Bross", NULL);
   screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   if (screen == NULL) {
     std::cout << "Can't set video mode" << std::endl;
