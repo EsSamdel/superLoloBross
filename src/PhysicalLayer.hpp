@@ -16,13 +16,13 @@
 
 class PhysicalLayer: public LayerInterface {
 public:
-	PhysicalLayer(Level * map, ScrollingBox * scroll, Perso * pers);
-	virtual ~PhysicalLayer();
+  PhysicalLayer(Level * map, ScrollingBox * scroll, Perso * pers);
+  virtual ~PhysicalLayer();
 
-	int persoMove(const int & leftRight, const int & jump, const int & state);
-	void displayMap(SDL_Surface* screen);
-	void displayPerso(SDL_Surface* screen);
-	void winAnnimation(SDL_Surface* screen);
+  int persoMove(const int & leftRight, const int & jump, const int & state);
+  void displayMap(SDL_Surface* screen);
+  void displayPerso(SDL_Surface* screen);
+  void winAnnimation(SDL_Surface* screen);
 
 protected:
   Rect2 getAdjacentBox(const Rect & spriteBox);
@@ -38,11 +38,11 @@ protected:
   int isDead(const Rect & spriteBox);
 
 protected:
-	Level * _map;
-	ScrollingBox * _scroll;
-	Perso * _perso;
-	int _nbObj;
-	int _compteurObj;
+  Level * _map;
+  ScrollingBox * _scroll;
+  Perso * _perso;
+  int _nbObj;
+  int _compteurObj;
 };
 
 #endif /* PHYSICALLAYER_H_ */

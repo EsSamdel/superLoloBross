@@ -19,8 +19,8 @@
 #define SGN(X) (((X)==0)?(0):(((X)<0)?(-1):(1)))
 #define ABS(X) ((((X)<0)?(-(X)):(X)))
 
-#define WINDOW_WIDTH 500 //240
-#define WINDOW_HEIGHT 500 //208
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 600
 #define PLAYER_MOVE_SPEED 1
 #define G 10
 

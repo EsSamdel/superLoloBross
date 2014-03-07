@@ -15,6 +15,7 @@ public:
   inline int getMouseYrel(){return _mouseyrel;}
   inline int getMouseButton(int i){return _mouseButtons[i];}
   inline int isQuit(){return _quit;}
+  inline void undoKey(int i){_key[i] = 0;};
 
 protected:
   char _key[SDLK_LAST];
