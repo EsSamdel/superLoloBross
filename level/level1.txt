@@ -1,6 +1,6 @@
 #tileset
-./images/tilesetLolo.png
-20 1
+./images/tileset.png
+25   1
 tile0: 0
 tile1: 2
 tile2: 1
@@ -21,6 +21,11 @@ tile16: 0
 tile17: 3
 tile18: 0
 tile19: 0
+tile20: 0
+tile21: 0
+tile22: 0
+tile23: 0
+tile24: 0
 #level
 100 30
 0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	0 	
