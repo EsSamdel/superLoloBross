@@ -31,6 +31,9 @@ int PhysicalLayer::persoMove(const int & leftRight, const int & jump, const int 
 
   // set Jump
   int inAir = isInTheAir(_perso->getBox());
+  int bumping = isBumpingRoof(_perso->getBox());
+  if(bumping)
+    _perso->setSpeedY(1.0);
   if(inAir)
     _perso->addSpeedY(0.1);
   if(jump && !inAir)
@@ -90,6 +93,15 @@ Rect2 PhysicalLayer::getFootBox(const Rect & spriteBox){ // mal codé!
   return box;
 }
 
+Rect2 PhysicalLayer::getHeadBox(const Rect & spriteBox){ // mal codé!
+  Rect2 box;
+  box.x1 = spriteBox.x / _map->getTileSizeX();
+  box.y1 = spriteBox.y / _map->getTileSizeY();
+  box.x2 = (spriteBox.x + spriteBox.w - 1) / _map->getTileSizeX();
+  box.y1 = spriteBox.y / _map->getTileSizeY();
+  return box;
+}
+
 int PhysicalLayer::collision(const Rect & spriteBox){
   /*
    * return 1 if collision return 0 else
@@ -120,6 +132,20 @@ int PhysicalLayer::isInTheAir(const Rect & spriteBox){
           return 0;
     }
   return 1;
+}
+
+int PhysicalLayer::isBumpingRoof(const Rect & spriteBox){
+  /*
+   * Return 1 if Bumping the roof 0 else
+   */
+  Rect2 head = getHeadBox(spriteBox);
+  if(spriteBox.y % _map->getTileSizeY() == 0)
+    for(int i = head.x1; i <= head.x2; i++){
+        int indiceTile = _map->getTileType(i, head.y1 - 1);
+        if(_map->isTileWall(indiceTile))
+          return 1;
+    }
+  return 0;
 }
 
 void PhysicalLayer::affine(const int & vx, const int & vy){
@@ -187,7 +213,7 @@ int PhysicalLayer::isDead(const Rect & spriteBox){
 
 void PhysicalLayer::winAnnimation(SDL_Surface* screen){
   int cpt = 0;
-  while(cpt < 10){
+  while(cpt < 4){
     int inAir = isInTheAir(_perso->getBox());
     if(inAir)
       _perso->addSpeedY(0.1);

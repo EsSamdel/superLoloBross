@@ -27,12 +27,14 @@ public:
 protected:
   Rect2 getAdjacentBox(const Rect & spriteBox);
   Rect2 getFootBox(const Rect & spriteBox);
+  Rect2 getHeadBox(const Rect & spriteBox);
   void changePositionPerso(const int & vx, const int & vy);
   void persoJump();
   int testMovePerso(const int & vx, const int & vy);
   void affine(const int & vx, const int & vy);
   int collision(const Rect & spriteBox);
   int isInTheAir(const Rect & spriteBox);
+  int isBumpingRoof(const Rect & spriteBox);
   int isOnObjectif(const Rect & spriteBox);
   int isOnEnd(const Rect & spriteBox);
   int isDead(const Rect & spriteBox);
