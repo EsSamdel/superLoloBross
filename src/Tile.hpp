@@ -17,6 +17,7 @@ public:
   inline int getType(){return _type;};
   inline bool isWall(){return _isWall;};
   inline bool isObject(){return _isObject;};
+  inline bool isMonster(){return _isMonster;};
   inline bool isEnd(){return _isEnd;};
   inline SDL_Rect * getRectangle(){return &_rectangle;};
 
@@ -25,6 +26,7 @@ protected:
   int _type;
   bool _isWall;
   bool _isObject;
+  bool _isMonster;
   bool _isEnd;
 };
 

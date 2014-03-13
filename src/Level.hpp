@@ -16,6 +16,7 @@ public:
   inline Uint16 getTileType(const int & i, const int & j){return _schema[i][j];}
   inline bool isTileWall(const int & tileNumber){return _tileTable[tileNumber].isWall();}
   inline bool isTileObject(const int & tileNumber){return _tileTable[tileNumber].isObject();}
+  inline bool isTileMonster(const int & tileNumber){return _tileTable[tileNumber].isMonster();}
   inline bool isTileEnd(const int & tileNumber){return _tileTable[tileNumber].isEnd();}
   inline SDL_Surface * getTileset() {return _tileset;}
   inline Tile getTile(int tileNumber) {return _tileTable[tileNumber];};

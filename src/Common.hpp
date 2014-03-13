@@ -21,7 +21,7 @@
 
 #define WINDOW_WIDTH 600
 #define WINDOW_HEIGHT 600
-#define PLAYER_MOVE_SPEED 1
+#define PLAYER_MOVE_SPEED 2
 #define G 10
 
 enum{

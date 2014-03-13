@@ -19,16 +19,25 @@ void Tile::init(const int sizeX, const int sizeY, const int posX, const int posY
     _isWall = false;
     _isObject = false;
     _isEnd = false;
+    _isMonster = false;
     break;
   case 2:
     _isWall = false;
     _isObject = true;
     _isEnd = false;
+    _isMonster = false;
     break;
   case 3:
     _isWall = false;
     _isObject = false;
     _isEnd = true;
+    _isMonster = false;
+    break;
+  case 4:
+    _isWall = false;
+    _isObject = false;
+    _isEnd = false;
+    _isMonster = true;
     break;
   default:
     _isWall = true;

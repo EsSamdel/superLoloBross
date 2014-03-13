@@ -45,6 +45,8 @@ void launchGame(SDL_Surface* screen){
         SDL_Delay(4 - (presentTime - previousTime));
       }
     }
+    if (res == 1)
+      layerGame.deathAnnimation(screen);
 
     if (res == 2)
       layerGame.winAnnimation(screen);

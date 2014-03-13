@@ -23,6 +23,7 @@ public:
   void displayMap(SDL_Surface* screen);
   void displayPerso(SDL_Surface* screen);
   void winAnnimation(SDL_Surface* screen);
+  void deathAnnimation(SDL_Surface* screen);
 
 protected:
   Rect2 getAdjacentBox(const Rect & spriteBox);
@@ -31,11 +32,14 @@ protected:
   void changePositionPerso(const int & vx, const int & vy);
   void persoJump();
   int testMovePerso(const int & vx, const int & vy);
+  void persoMoveFree(const int & vx, const int & vy);
   void affine(const int & vx, const int & vy);
   int collision(const Rect & spriteBox);
   int isInTheAir(const Rect & spriteBox);
+  int isSpriteOutOfMap(const Rect & spriteBox);
   int isBumpingRoof(const Rect & spriteBox);
   int isOnObjectif(const Rect & spriteBox);
+  int isOnMonster(const Rect & spriteBox);
   int isOnEnd(const Rect & spriteBox);
   int isDead(const Rect & spriteBox);
 

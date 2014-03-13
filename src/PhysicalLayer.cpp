@@ -53,8 +53,8 @@ int PhysicalLayer::persoMove(const int & leftRight, const int & jump, const int 
     return 1;
 
   // check objectif:
-    if(isOnObjectif(_perso->getBox()))
-      _compteurObj += 1;
+  if(isOnObjectif(_perso->getBox()))
+    _compteurObj += 1;
 
   // check end:
   int res = isOnEnd(_perso->getBox());
@@ -107,8 +107,7 @@ int PhysicalLayer::collision(const Rect & spriteBox){
    * return 1 if collision return 0 else
   */
   Rect2 boxAdjacent = getAdjacentBox(spriteBox);
-  if (spriteBox.x < 0 || spriteBox.x + spriteBox.w >= _map->getNbtilesWorldWidth() * _map->getTileSizeX()
-     || spriteBox.y < 0 || spriteBox.y + spriteBox.h >= _map->getNbtilesWorldHeight() * _map->getTileSizeY() )
+  if (isSpriteOutOfMap(spriteBox))
      return 1;
 
   for(int i = boxAdjacent.x1; i <= boxAdjacent.x2; i++)
@@ -118,6 +117,14 @@ int PhysicalLayer::collision(const Rect & spriteBox){
         return 1;
     }
   return 0;
+}
+
+int PhysicalLayer::isSpriteOutOfMap(const Rect & spriteBox){
+  if (spriteBox.x < 0 || spriteBox.x + spriteBox.w >= _map->getNbtilesWorldWidth() * _map->getTileSizeX()
+     || spriteBox.y < 0 || spriteBox.y + spriteBox.h >= _map->getNbtilesWorldHeight() * _map->getTileSizeY() )
+     return 1;
+  else
+    return 0;
 }
 
 int PhysicalLayer::isInTheAir(const Rect & spriteBox){
@@ -175,6 +182,14 @@ int PhysicalLayer::testMovePerso(const int & vx, const int & vy){
   return 0;
 }
 
+void PhysicalLayer::persoMoveFree(const int & vx, const int & vy){
+  Rect moveBox;
+  copyBox(_perso->getBox(), moveBox);
+  moveBox.x += vx;
+  moveBox.y += vy;
+  _perso->setBox(moveBox);
+}
+
 int PhysicalLayer::isOnObjectif(const Rect & spriteBox){
   /*
    * return 1 if on return 0 else
@@ -185,6 +200,21 @@ int PhysicalLayer::isOnObjectif(const Rect & spriteBox){
       int indiceTile = _map->getTileType(i, j);
       if(_map->isTileObject(indiceTile)){
         _map->checkObjectif(i, j);
+        return 1;
+      }
+    }
+  return 0;
+}
+
+int PhysicalLayer::isOnMonster(const Rect & spriteBox){
+  /*
+   * return 1 if on return 0 else
+  */
+  Rect2 boxAdjacent = getAdjacentBox(spriteBox);
+  for(int i = boxAdjacent.x1; i <= boxAdjacent.x2; i++)
+    for(int j = boxAdjacent.y1; j <= boxAdjacent.y2; j++){
+      int indiceTile = _map->getTileType(i, j);
+      if(_map->isTileMonster(indiceTile)){
         return 1;
       }
     }
@@ -208,6 +238,8 @@ int PhysicalLayer::isOnEnd(const Rect & spriteBox){
 int PhysicalLayer::isDead(const Rect & spriteBox){
   if (spriteBox.y + spriteBox.h +1 >= _map->getNbtilesWorldHeight() * _map->getTileSizeY() )
      return 1;
+  if (isOnMonster(spriteBox))
+    return 1;
   return 0;
 }
 
@@ -222,6 +254,19 @@ void PhysicalLayer::winAnnimation(SDL_Surface* screen){
       cpt++;
     }
     changePositionPerso(0, _perso->getSpeedY());
+    displayMap(screen);
+    displayPerso(screen);
+    SDL_Flip(screen);
+    SDL_Delay(2);
+  }
+}
+
+void PhysicalLayer::deathAnnimation(SDL_Surface* screen){
+  _perso->setSpeedY(-6);
+  persoMoveFree(0, _perso->getSpeedY());
+  while(!isSpriteOutOfMap(_perso->getBox())){
+    _perso->addSpeedY(0.1);
+    persoMoveFree(0, _perso->getSpeedY());
     displayMap(screen);
     displayPerso(screen);
     SDL_Flip(screen);
