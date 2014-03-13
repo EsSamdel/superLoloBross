@@ -19,10 +19,20 @@ PhysicalLayer::PhysicalLayer(Level * map, ScrollingBox * scroll, Perso * pers) {
       if(_map->isTileObject(indiceTile))
         _nbObj += 1;
 	  }
+
+  // TODO create class to encapsulate sound
+  Mix_AllocateChannels(10);
+  _soundJump = Mix_LoadWAV("./audio/jump.wav");
+  _soundObject = Mix_LoadWAV("./audio/obj.wav");
+  _soundDeath = Mix_LoadWAV("./audio/death.wav");
+  _soundWin = Mix_LoadWAV("./audio/win1.wav");
 }
 
 PhysicalLayer::~PhysicalLayer() {
-	// TODO Auto-generated destructor stub
+  Mix_FreeChunk(_soundJump);
+  Mix_FreeChunk(_soundObject);
+  Mix_FreeChunk(_soundDeath);
+  Mix_FreeChunk(_soundWin);
 }
 
 int PhysicalLayer::persoMove(const int & leftRight, const int & jump, const int & state){
@@ -36,8 +46,10 @@ int PhysicalLayer::persoMove(const int & leftRight, const int & jump, const int 
     _perso->setSpeedY(1.0);
   if(inAir)
     _perso->addSpeedY(0.1);
-  if(jump && !inAir)
+  if(jump && !inAir){
     _perso->setSpeedY(-6);
+    Mix_PlayChannel(1, _soundJump, 0);
+  }
 
   changePositionPerso(vx, _perso->getSpeedY());
 
@@ -49,12 +61,15 @@ int PhysicalLayer::persoMove(const int & leftRight, const int & jump, const int 
   _perso->setState(state);
 
   // chech death:
-  if(isDead(_perso->getBox()))
+  if(isDead(_perso->getBox())){
     return 1;
+  }
 
   // check objectif:
-  if(isOnObjectif(_perso->getBox()))
+  if(isOnObjectif(_perso->getBox())){
     _compteurObj += 1;
+    Mix_PlayChannel(2, _soundObject, 0);
+  }
 
   // check end:
   int res = isOnEnd(_perso->getBox());
@@ -244,8 +259,9 @@ int PhysicalLayer::isDead(const Rect & spriteBox){
 }
 
 void PhysicalLayer::winAnnimation(SDL_Surface* screen){
+  Mix_PlayChannel(4, _soundWin, 0);
   int cpt = 0;
-  while(cpt < 4){
+  while(cpt < 5){
     int inAir = isInTheAir(_perso->getBox());
     if(inAir)
       _perso->addSpeedY(0.1);
@@ -262,6 +278,7 @@ void PhysicalLayer::winAnnimation(SDL_Surface* screen){
 }
 
 void PhysicalLayer::deathAnnimation(SDL_Surface* screen){
+  Mix_PlayChannel(3, _soundDeath, 0);
   _perso->setSpeedY(-6);
   persoMoveFree(0, _perso->getSpeedY());
   while(!isSpriteOutOfMap(_perso->getBox())){

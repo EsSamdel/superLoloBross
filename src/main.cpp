@@ -19,6 +19,14 @@ int main() {
     return EXIT_FAILURE;
   }
 
+  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1){
+     std::cout << Mix_GetError() << std::endl;
+  }
+  Mix_Music *musiqueFond;
+  musiqueFond = Mix_LoadMUS("./audio/fond.mp3");
+  Mix_PlayMusic(musiqueFond, -1);
+  Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+
   Menu menu("./images/menu.jpg");
   Event input;
   while (!input.getKey(SDLK_ESCAPE) && !input.isQuit()) {
@@ -32,6 +40,8 @@ int main() {
     SDL_Delay(5);
   }
 
+  Mix_FreeMusic(musiqueFond);
+  Mix_CloseAudio();
   SDL_Quit();
   return EXIT_SUCCESS;
 }

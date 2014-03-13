@@ -49,6 +49,10 @@ protected:
   Perso * _perso;
   int _nbObj;
   int _compteurObj;
+  Mix_Chunk * _soundJump;
+  Mix_Chunk * _soundObject;
+  Mix_Chunk * _soundDeath;
+  Mix_Chunk * _soundWin;
 };
 
 #endif /* PHYSICALLAYER_H_ */
